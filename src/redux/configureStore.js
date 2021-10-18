@@ -11,7 +11,6 @@ export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
 	user: User,
-	post: Post,
 	product: Product,
 	cart: Cart,
 	router: connectRouter(history),
