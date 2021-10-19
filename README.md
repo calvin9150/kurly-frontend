@@ -1,71 +1,29 @@
-# Getting Started with Create React App
+# 항해99 1조 Market Kurly 클론코딩 프론트엔드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 💻 클론 하고 싶은 서비스
 
-## Available Scripts
+Market Kurly : [https://www.kurly.com/](https://www.kurly.com/)
 
-In the project directory, you can run:
+# 🌐 Wireframe
 
-### `yarn start`
+- 회원가입 페이지
+  ![KakaoTalk_20211018_113105484_05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e6061368-3242-4599-ace5-4b8ccd0182bb/KakaoTalk_20211018_113105484_05.png)
+- 로그인 페이지
+  ![KakaoTalk_20211018_113105484.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/24fb1066-546e-4237-a494-d3337d152e54/KakaoTalk_20211018_113105484.png)
+- 메인 페이지
+  ![KakaoTalk_20211018_113105484_01.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/20dbc3a9-1234-44e1-9014-3182a6a28feb/KakaoTalk_20211018_113105484_01.png)
+- 장바구니 페이지
+  ![KakaoTalk_20211018_113105484_04.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6cace5ad-3cff-49e7-816e-9acbe2c96867/KakaoTalk_20211018_113105484_04.png)
+- 상세 페이지 ( 여유 생기면 추가)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  ![KakaoTalk_20211018_113105484_02.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fe854aaa-90bb-42c7-9090-ceb9a2269a76/KakaoTalk_20211018_113105484_02.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  # ⚙️ API 설계
 
-### `yarn test`
+[로그인/회원가입 API](https://www.notion.so/6f13d2e060e24346b239a71a24afaec1)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[상품 메인 API](https://www.notion.so/4871500afff24774b05fc9501a6cc552)
 
-### `yarn build`
+[상품 상세 페이지 API (시간 남으면)](https://www.notion.so/7bcc6491c374468d9d5a5b70a08d1dd3)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# kurly-frontend
+[장바구니 API](https://www.notion.so/6728e8ec9d9a4e6eb993dd475a825bb4)
