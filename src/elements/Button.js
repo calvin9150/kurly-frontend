@@ -1,3 +1,5 @@
+// Button.js
+
 // import를 한다.
 import React from 'react';
 import styled from 'styled-components';
@@ -17,7 +19,7 @@ const Button = props => {
 		size,
 		bold,
 		borderColor,
-		_onClick,
+		onClick,
 	} = props;
 
 	// 넷째, children은 스타일을 담당하는 친구가 아니기 때문에 styles안에서 관리한다.
@@ -34,7 +36,7 @@ const Button = props => {
 
 	return (
 		<React.Fragment>
-			<BasicButton {...styles} onClick={_onClick} disabled={disabled}>
+			<BasicButton {...styles} onClick={onClick} disabled={disabled}>
 				{text ? text : children}
 			</BasicButton>
 		</React.Fragment>
@@ -54,7 +56,7 @@ Button.defaultProps = {
 	size: '16px',
 	bold: false,
 	borderColor: '1px solid #5f0081',
-	_onClick: () => {},
+	onClick: () => {},
 };
 
 // 셋째, styled-components를 사용한다.
@@ -80,4 +82,5 @@ const BasicButton = styled.button`
 	}
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정해 둔다.
 export default Button;
