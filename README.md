@@ -1,22 +1,19 @@
-# 항해99 1조 Market Kurly 클론코딩 프론트엔드
+# 항해99 1조 클론코딩 프론트엔드
 
-# 💻 클론 하고 싶은 서비스
+# 💻 마켓컬리 클론코딩딩
 
 Market Kurly : [https://www.kurly.com/](https://www.kurly.com/)
 
 # 🌐 Wireframe
 
 - 회원가입 페이지
-  ![KakaoTalk_20211018_113105484_05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e6061368-3242-4599-ace5-4b8ccd0182bb/KakaoTalk_20211018_113105484_05.png)
+  ![KakaoTalk_20211018_113105484_05.png](https://user-images.githubusercontent.com/71538344/137849742-e8009429-b7aa-4640-8bef-f1e33a7c6e4e.png)
 - 로그인 페이지
-  ![KakaoTalk_20211018_113105484.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/24fb1066-546e-4237-a494-d3337d152e54/KakaoTalk_20211018_113105484.png)
+  ![KakaoTalk_20211018_113105484.png](https://user-images.githubusercontent.com/71538344/137849552-6fd18707-ffe8-4c05-852e-1aea336804e7.png)
 - 메인 페이지
-  ![KakaoTalk_20211018_113105484_01.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/20dbc3a9-1234-44e1-9014-3182a6a28feb/KakaoTalk_20211018_113105484_01.png)
+  ![KakaoTalk_20211018_113105484_01.png](https://user-images.githubusercontent.com/71538344/137849584-51b9d888-d867-4fcd-9cc0-a8dffb5498b6.png)
 - 장바구니 페이지
-  ![KakaoTalk_20211018_113105484_04.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6cace5ad-3cff-49e7-816e-9acbe2c96867/KakaoTalk_20211018_113105484_04.png)
-- 상세 페이지 ( 여유 생기면 추가)
-
-  ![KakaoTalk_20211018_113105484_02.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fe854aaa-90bb-42c7-9090-ceb9a2269a76/KakaoTalk_20211018_113105484_02.png)
+  ![KakaoTalk_20211018_113105484_04.png](https://user-images.githubusercontent.com/71538344/137849785-2f4e0cb7-62a9-4ccf-92fd-ef563b302722.png)
 
   # ⚙️ API 설계
 
