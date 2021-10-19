@@ -10,7 +10,7 @@ import User from './modules/user';
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-	user: User,
+	// user: User,
 	product: Product,
 	cart: Cart,
 	router: connectRouter(history),
