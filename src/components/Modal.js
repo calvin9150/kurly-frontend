@@ -1,17 +1,67 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+
 import styled from 'styled-components';
 import Button from '../elements/Button';
 
+const Modal = ({ close }) => {
+	const modalClose = useCallback(() => {
+		close();
+	}, [close]);
+
+	return (
+		<>
+			<Wrapper>
+				<Container>
+					<TextLayout>
+						<Subject>[서울만두] 고기교자</Subject>
+						<Price>
+							5,900원
+							<Count className="count">
+								<PlusMinusBtn
+									onClick={() => {
+										alert('hi');
+									}}
+								>
+									-
+								</PlusMinusBtn>
+								<input readOnly value={15} />
+								<PlusMinusBtn>+</PlusMinusBtn>
+							</Count>
+						</Price>
+					</TextLayout>
+					<PriceLayout>
+						<PriceContent>
+							<Subject>합계</Subject>
+							<Price>5,900원</Price>
+						</PriceContent>
+
+						<PointInfo>
+							<Point>적립</Point>로그인 후, 적립혜택 제공
+						</PointInfo>
+					</PriceLayout>
+					<Buttons>
+						<Button width={'47%'} bg={'white'} color={'black'} onClick={modalClose}>
+							취소
+						</Button>
+						<Button width={'47%'}>장바구니 담기</Button>
+					</Buttons>
+				</Container>
+			</Wrapper>
+		</>
+	);
+};
+
 const Wrapper = styled.div`
 	position: fixed;
-	display: ${props => (props.visible ? 'flex' : 'none')};
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
-	z-index: 999;
 	background-color: rgba(44, 44, 44, 0.267);
-	border-radius: 20px;
+	top: 0;
+	left: 0;
+	z-index: 999;
 `;
 
 const Container = styled.div`
@@ -34,12 +84,12 @@ const TextLayout = styled.div`
 	}
 `;
 
-const Subject = styled.p`
+const Subject = styled.span`
 	font-size: 1em;
 	font-weight: normal;
 `;
 
-const Price = styled.p`
+const Price = styled.span`
 	font-size: 1.2em;
 	font-weight: bold;
 	display: flex;
@@ -49,7 +99,7 @@ const Price = styled.p`
 const PriceLayout = styled.div`
 	width: 100%;
 	height: 90px;
-	margin-bottom: 20px;
+	margin: 20px 0;
 `;
 
 const PriceContent = styled.div`
@@ -99,49 +149,5 @@ const PlusMinusBtn = styled.button`
 	height: 27px;
 	width: 27px;
 `;
-
-const Modal = ({ children, visible }) => {
-	return (
-		<>
-			<Wrapper visible={visible}>
-				<Container>
-					<TextLayout>
-						<Subject>[서울만두] 고기교자</Subject>
-						<Price>
-							5,900원
-							<Count className="count">
-								<PlusMinusBtn
-									onClick={() => {
-										alert('hi');
-									}}
-								>
-									-
-								</PlusMinusBtn>
-								<input readOnly value={15} />
-								<PlusMinusBtn>+</PlusMinusBtn>
-							</Count>
-						</Price>
-					</TextLayout>
-					<PriceLayout>
-						<PriceContent>
-							<Subject>합계</Subject>
-							<Price>5,900원</Price>
-						</PriceContent>
-
-						<PointInfo>
-							<Point>적립</Point>로그인 후, 적립혜택 제공
-						</PointInfo>
-					</PriceLayout>
-					<Buttons>
-						<Button width={'47%'} bg={'white'} color={'black'}>
-							취소
-						</Button>
-						<Button width={'47%'}>장바구니 담기</Button>
-					</Buttons>
-				</Container>
-			</Wrapper>
-		</>
-	);
-};
 
 export default Modal;

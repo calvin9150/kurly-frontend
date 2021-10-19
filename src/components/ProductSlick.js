@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import Card from '../elements/Card';
-import { actionCreators as productsActions } from '../redux/modules/product';
 
 const Wrap = styled.div`
 	width: 100%;
@@ -76,17 +74,7 @@ function PrevArrow(props) {
 	);
 }
 
-const ProductSlick = () => {
-	const dispatch = useDispatch();
-
-	const productsList = useSelector(state => state.product.list);
-	console.log('productsList');
-	console.log(productsList);
-
-	useEffect(() => {
-		dispatch(productsActions.getProductsMiddleWare());
-	}, [dispatch]);
-
+const ProductSlick = ({ productsList }) => {
 	const settings = {
 		speed: 500,
 		infinite: false,

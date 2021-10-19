@@ -45,7 +45,7 @@ const Bargain = () => {
 					width="330px"
 					height="450px"
 					margin="0 5px"
-					title="뷰티 소품 최대 40% 할인인"
+					title="뷰티 소품 최대 40% 할인"
 					price="특가로 만나는 필수 아이템"
 					titleSize="18px"
 					priceSize="15px"

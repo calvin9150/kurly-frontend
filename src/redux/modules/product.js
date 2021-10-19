@@ -28,10 +28,14 @@ const getProductsMiddleWare = () => {
 		dispatch(loading(true));
 		api
 			.get('/list')
-			.then(res => {
-				const products = res.data;
-				dispatch(getProducts(products));
-			})
+			.then(
+				res => {
+					const products = res.data.post;
+					console.log('products', products);
+					dispatch(getProducts(products));
+				},
+				{ withCredentials: true },
+			)
 			.catch(err => {
 				console.error(err);
 				dispatch(loading(false));
