@@ -1,14 +1,17 @@
 import styled from 'styled-components';
+import Bargain from '../components/Bargain';
 
-import CardList from '../components/CardList';
+// import CardList from '../components/CardList';
 import Event from '../components/Event';
+import Modal from '../components/Modal';
 import ProductSlick from '../components/ProductSlick';
 
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100vw;
+	min-width: 1050px;
+	overflow: hidden;
 	/* height: 100vh; */
 `;
 
@@ -23,12 +26,14 @@ const Main = () => {
 
 	return (
 		<>
+			<Modal />
 			<Container>
 				<Event />
 				<ProductSlickLayout>
 					<ProductSlick />
 				</ProductSlickLayout>
-				<CardList />
+				<Bargain />
+				{/* <CardList /> */}
 			</Container>
 		</>
 	);

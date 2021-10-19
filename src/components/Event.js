@@ -26,13 +26,22 @@ const Event = () => {
 			<Wrap>
 				<Slider {...settings}>
 					<div>
-						<img alt="kurly1" src={require('../images/kurly1.png').default} />
+						<img
+							alt="kurly1"
+							src="https://firebasestorage.googleapis.com/v0/b/kurly-8cf7b.appspot.com/o/kurly1.png?alt=media&token=a40ee120-4994-41ca-918d-c7277d0e895d"
+						/>
 					</div>
 					<div>
-						<img alt="kurly2" src={require('../images/kurly2.png').default} />
+						<img
+							alt="kurly2"
+							src="https://firebasestorage.googleapis.com/v0/b/kurly-8cf7b.appspot.com/o/kurly2.png?alt=media&token=498f913f-1b9d-40cc-9518-42c2d9ceb652"
+						/>
 					</div>
 					<div>
-						<img alt="kurly3" src={require('../images/kurly3.png').default} />
+						<img
+							alt="kurly3"
+							src="https://firebasestorage.googleapis.com/v0/b/kurly-8cf7b.appspot.com/o/kurly3.png?alt=media&token=b4446447-164b-45cd-84d9-c3d375c74c85"
+						/>
 					</div>
 				</Slider>
 			</Wrap>

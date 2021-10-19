@@ -89,6 +89,7 @@ const ProductSlick = () => {
 
 	const settings = {
 		speed: 500,
+		infinite: false,
 		slidesToShow: 4,
 		slidesToScroll: 4,
 		nextArrow: <NextArrow />,
@@ -110,7 +111,7 @@ const ProductSlick = () => {
 				},
 			},
 			{
-				breakpoint: 580,
+				breakpoint: 800,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
