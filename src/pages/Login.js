@@ -1,13 +1,29 @@
 // Login.js
 
 // import를 한다.
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements/index';
 import { history } from '../redux/configureStore';
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/product';
 
 // Login 함수형 컴포넌트를 만든다.
 const Login = props => {
+	const dispatch = useDispatch();
+
+	const [id, setId] = useState('');
+	const [pw, setPw] = useState('');
+
+	const login = (id, pw) => {
+		if (id === '' || pw === '') {
+			alert('아이디 혹은 비밀번호 오류입니다.');
+			return false;
+		}
+
+		dispatch(userActions.loginAPI(id, pw));
+	};
+
 	return (
 		<React.Fragment>
 			<LoginWrap>
@@ -28,7 +44,14 @@ const Login = props => {
 						</FindIdPw>
 					</Grid>
 				</Grid>
-				<Button margin="17px 0px 0px 0px">로그인</Button>
+				<Button
+					margin="17px 0px 0px 0px"
+					onClick={() => {
+						login(id, pw);
+					}}
+				>
+					로그인
+				</Button>
 				<Button
 					margin="10px"
 					bg="#ffffff"

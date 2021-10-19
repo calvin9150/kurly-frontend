@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // Input의 함수형 컴포넌트를 만든다.
 const Input = props => {
 	// 둘째, defaultProps에서 설정해준 값을 가져온다.
-	const { placeholder, _onChange, type, width, margin, padding, _onClick } = props;
+	const { placeholder, onChange, type, width, margin, padding, onClick } = props;
 
 	// 넷째, children은 스타일을 담당하는 친구가 아니기 때문에 styles안에서 관리한다.
 	const styles = {
@@ -22,8 +22,8 @@ const Input = props => {
 				{...styles}
 				type={type}
 				placeholder={placeholder}
-				onClick={_onClick}
-				onChange={_onChange}
+				onClick={onClick}
+				onChange={onChange}
 			></ElInput>
 		</React.Fragment>
 	);
