@@ -30,7 +30,7 @@ const Modal = ({ close, title, price, id, img }) => {
 
 	const onClickAddCart = useCallback(() => {
 		dispatch(cartActions.addCardMiddleWare(id, title, currentPrice, img, quantity));
-	}, [dispatch, id, title, price, img, quantity]);
+	}, [dispatch, id, title, currentPrice, img, quantity]);
 
 	return (
 		<>
