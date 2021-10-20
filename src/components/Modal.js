@@ -1,40 +1,57 @@
 import React, { useCallback, useState } from 'react';
+import { actionCreators as cartActions } from '../redux/modules/cart';
+import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
 import Button from '../elements/Button';
+import { priceUnit } from '../shared/common';
 
-const Modal = ({ close }) => {
+const Modal = ({ close, title, price, id, img }) => {
+	const dispatch = useDispatch();
+
+	const [quantity, setQuantity] = useState(1);
+	const [currentPrice, setCurrrentPrice] = useState(parseInt(price));
+
 	const modalClose = useCallback(() => {
 		close();
 	}, [close]);
+
+	const onclickPlus = useCallback(() => {
+		if (quantity > 99) return;
+		setQuantity(quantity + 1);
+		setCurrrentPrice(parseInt(price) * (quantity + 1));
+	}, [quantity, price]);
+
+	const onclickMinus = useCallback(() => {
+		if (quantity < 2) return;
+		setQuantity(quantity - 1);
+		setCurrrentPrice(currentPrice - price);
+	}, [quantity, currentPrice, price]);
+
+	const onClickAddCart = useCallback(() => {
+		dispatch(cartActions.addCardMiddleWare(id, title, currentPrice, img, quantity));
+	}, [dispatch, id, title, price, img, quantity]);
 
 	return (
 		<>
 			<Wrapper>
 				<Container>
 					<TextLayout>
-						<Subject>[서울만두] 고기교자</Subject>
+						<Subject>{title}</Subject>
 						<Price>
-							5,900원
+							{priceUnit(price)}원
 							<Count className="count">
-								<PlusMinusBtn
-									onClick={() => {
-										alert('hi');
-									}}
-								>
-									-
-								</PlusMinusBtn>
-								<input readOnly value={15} />
-								<PlusMinusBtn>+</PlusMinusBtn>
+								<PlusMinusBtn onClick={onclickMinus}>-</PlusMinusBtn>
+								<input readOnly value={quantity} />
+								<PlusMinusBtn onClick={onclickPlus}>+</PlusMinusBtn>
 							</Count>
 						</Price>
 					</TextLayout>
 					<PriceLayout>
 						<PriceContent>
 							<Subject>합계</Subject>
-							<Price>5,900원</Price>
+							<Price>{priceUnit(currentPrice)}원</Price>
 						</PriceContent>
-
 						<PointInfo>
 							<Point>적립</Point>로그인 후, 적립혜택 제공
 						</PointInfo>
@@ -43,7 +60,9 @@ const Modal = ({ close }) => {
 						<Button width={'47%'} bg={'white'} color={'black'} onClick={modalClose}>
 							취소
 						</Button>
-						<Button width={'47%'}>장바구니 담기</Button>
+						<Button width={'47%'} onClick={onClickAddCart}>
+							장바구니 담기
+						</Button>
 					</Buttons>
 				</Container>
 			</Wrapper>

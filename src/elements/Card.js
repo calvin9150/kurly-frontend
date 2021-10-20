@@ -16,6 +16,7 @@ const Card = ({
 	center,
 	color,
 	icon,
+	id,
 }) => {
 	const styles = {
 		width: width,
@@ -32,7 +33,7 @@ const Card = ({
 
 	return (
 		<>
-			{modalOpen && <Modal close={modalClose} />}
+			{modalOpen && <Modal close={modalClose} title={title} price={price} id={id} img={img}/>}
 			<Layout {...styles}>
 				<Photo>
 					{icon && <CartBtn onClick={modalClose} />}
@@ -41,7 +42,7 @@ const Card = ({
 				<TextLayout>
 					<Subject titleSize={titleSize}>{title}</Subject>
 					<Price priceSize={priceSize} color={color}>
-						{priceUnit(price)}원
+						{price && priceUnit(price)}원
 					</Price>
 				</TextLayout>
 			</Layout>

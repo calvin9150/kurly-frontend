@@ -27,11 +27,10 @@ const getProductsMiddleWare = () => {
 	return dispatch => {
 		dispatch(loading(true));
 		api
-			.get('/list')
+			.get('/posts/main')
 			.then(
 				res => {
 					const products = res.data.post;
-					console.log('products', products);
 					dispatch(getProducts(products));
 				},
 				{ withCredentials: true },
@@ -47,8 +46,6 @@ export default handleActions(
 	{
 		[GET_PRODUCTS]: (state, action) =>
 			produce(state, draft => {
-				console.log('action.payload.products');
-				console.log(action.payload.products);
 				draft.list = action.payload.products;
 				draft.isLoading = false;
 			}),

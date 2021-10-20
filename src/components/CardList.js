@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Card from '../elements/Card';
-import Modal from '../components/Modal';
 
 const Container = styled.div`
 	display: flex;
@@ -16,7 +15,7 @@ const Container = styled.div`
 
 const Contents = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	flex-wrap: wrap;
 	width: 55%;
 	margin: 30px 0 30px;
@@ -28,6 +27,7 @@ const Contents = styled.div`
 `;
 
 const CardList = ({ productsList }) => {
+	console.log('productsList', productsList);
 	return (
 		<>
 			<Container>
@@ -41,6 +41,7 @@ const CardList = ({ productsList }) => {
 							price={v.price}
 							width="330px"
 							height="570px"
+							id={v._id}
 							icon
 						/>
 					))}
