@@ -25,24 +25,23 @@ const initialState = {
 };
 
 // 회원가입
-const signupAPI = (id, pw, email, passwordConfirm) => {
+const signupAPI = (id, pw, email, name, passwordConfirm) => {
 	return function (dispatch, getState, { history }) {
-		window.alert('asd', id);
-		window.alert('asd', pw);
-		window.alert('asd', passwordConfirm);
-		window.alert('asd', email);
+		window.alert('아이디', id);
+		window.alert('비밀번호', pw);
+		window.alert('비밀번호확인', passwordConfirm);
+		window.alert('이름', name);
+		window.alert('이메일', email);
 		api
 			.post('/users/signUp', {
 				userid: id,
 				password: pw,
-				// name: userName,
+				name: name,
 				passwordConfirm: passwordConfirm,
 				email: email,
 			})
 			.then(response => response.json())
 			.then(result => {
-				// 중복체크 후 다시 중복 아이디, 이메일로 바꿨을 경우
-				// 대비 서버에서 한번 더 체크.
 				let dupMsg = result.message;
 				if (dupMsg === 'emailfalse') {
 					window.alert('이메일 중복확인을 해주세요.');
@@ -66,20 +65,17 @@ const loginAPI = (id, pw) => {
 			})
 			.then(result => {
 				console.log(result);
-				//성공시 토큰, 유저 정보 저장
 				if (result.status === 200) {
 					let token = result.headers.get('Authorization');
 					let userInfo = result.headers.get('userInfo');
 					userInfo = JSON.parse(userInfo);
 					userInfo.name = decodeURI(atob(userInfo.name));
-					userInfo.address = decodeURI(atob(userInfo.address));
 					localStorage.setItem('token', token);
 					localStorage.setItem('userInfo', JSON.stringify(userInfo));
 					dispatch(
 						setUser({
 							uid: userInfo.uid,
 							name: userInfo.name,
-							address: userInfo.address.split('+').join(' '),
 						}),
 					);
 					history.push('/');

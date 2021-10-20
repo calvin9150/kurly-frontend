@@ -31,12 +31,12 @@ const Signup = props => {
 	console.log('이름', userName);
 	console.log('이메일', email);
 
-	const changePw = (e, pwInfoLen, pwInfoMatch, pwInfoContinuos) => {
+	const changePw = e => {
 		const targetPw = e.target.value;
 		setPw(targetPw);
 	};
 
-	const changePwMacth = (e, rePwInfo) => {
+	const changePwMacth = e => {
 		const checkPw = e.target.value;
 		passwordConfirm(checkPw);
 	};
