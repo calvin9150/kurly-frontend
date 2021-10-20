@@ -5,12 +5,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements/index';
 import { history } from '../redux/configureStore';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/product';
 
 // image
 import HeaderLeftImg from '../images/header-left-delivery.gif';
 
 // Header의 함수형 컴포넌트를 만든다.
 const Header = props => {
+	const dispatch = useDispatch();
+	const is_login = useSelector(state => state.user.is_login);
+	const userInfo = useSelector(state => state.user.user);
+
+	const headerChange = () => {
+		const headerbox = document.querySelector('.header');
+		const loginbox = document.querySelector('.scroll-event');
+
+		if (window.scrollY > 105) {
+			loginbox.style.display = 'none';
+			headerbox.style.position = 'fixed';
+			headerbox.style.zIndex = '300';
+			headerbox.style.width = '1050px';
+		} else {
+			loginbox.style.display = 'block';
+			headerbox.style.position = '';
+		}
+	};
+
 	return (
 		<React.Fragment>
 			<Grid width="1050px" margin="0 auto">
@@ -24,7 +45,7 @@ const Header = props => {
 								alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송"
 							/>
 							<HeaderMenu>
-								{
+								{!is_login && (
 									<React.Fragment>
 										<li onClick={() => history.push('/signup')} className="header-menu signup">
 											회원가입
@@ -33,15 +54,23 @@ const Header = props => {
 											로그인
 										</li>
 									</React.Fragment>
-								}
-								{
+								)}
+								{is_login && (
 									<React.Fragment>
 										<li className="header-menu">
 											<MemberSpan>일반</MemberSpan>
+											{userInfo?.name} 님
 										</li>
-										<li className="header-menu">로그아웃</li>
+										<li
+											className="header-menu"
+											onClick={() => {
+												dispatch(userActions.logout());
+											}}
+										>
+											로그아웃
+										</li>
 									</React.Fragment>
-								}
+								)}
 								<li className="arrow">고객센터</li>
 							</HeaderMenu>
 						</Grid>
@@ -51,6 +80,7 @@ const Header = props => {
 								width="103px"
 								alt="마켓컬리 로고"
 								style={{ cursor: 'pointer' }}
+								onClick={() => history.push('/')}
 							/>
 						</Grid>
 					</ScrollMenu>
@@ -58,10 +88,10 @@ const Header = props => {
 						<Grid>
 							<HeaderCategory>
 								<li className="all-category">전체 카테고리</li>
-								<li>신상품</li>
-								<li>베스트</li>
-								<li>알뜰쇼핑 </li>
-								<li> 금주혜택</li>
+								<li onClick={() => history.push('/new')}>신상품</li>
+								<li onClick={() => history.push('/')}>베스트</li>
+								<li onClick={() => history.push('/cheap')}>알뜰쇼핑 </li>
+								<li onClick={() => history.push('/event')}> 금주혜택</li>
 							</HeaderCategory>
 						</Grid>
 						<Grid>
@@ -69,7 +99,16 @@ const Header = props => {
 						</Grid>
 						<Grid>
 							<Icons className="adress-icon" />
-							<Icons className="cart-icon"></Icons>
+							<Icons
+								className="cart-icon"
+								onClick={() => {
+									if (!userInfo) {
+										alert('로그인 후 사용해주세요!');
+										return false;
+									}
+									history.push('/cart');
+								}}
+							></Icons>
 						</Grid>
 					</Grid>
 				</HeaderWrap>

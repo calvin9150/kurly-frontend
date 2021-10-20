@@ -1,12 +1,108 @@
 // Signup.js
 
 // import를 한다.
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements/index';
 
+import { actionCreators as userActions } from '../redux/modules/user';
+import { useSelector, useDispatch } from 'react-redux';
+import { idCheck, pwMacth, pwContinuous, emailCheck } from '../shared/common';
+import { api } from '../shared/api';
+
 // Signup 함수형 컴포넌트를 만든다.
 const Signup = props => {
+	const [id, setId] = useState('');
+	const [pw, setPw] = useState('');
+	const [pwCheck, passwordConfirm] = useState('');
+	const [userName, setUserName] = useState('');
+	const [email, setEmail] = useState('');
+	const [idDup, setIdDup] = useState(false);
+	const [emailDup, setEmailDup] = useState(false);
+	const dispatch = useDispatch();
+
+	//해당 조건 충족 여부에 따라 info 다르게..
+	const changeId = e => {
+		setId(e.target.value);
+	};
+	console.log('아이디', id);
+	console.log('비밀번호', pw);
+	console.log('비밀번호확인', pwCheck);
+	console.log('이름', userName);
+	console.log('이메일', email);
+
+	const changePw = e => {
+		const targetPw = e.target.value;
+		setPw(targetPw);
+	};
+
+	const changePwMacth = e => {
+		const checkPw = e.target.value;
+		passwordConfirm(checkPw);
+	};
+
+	const checkIdAPI = (userId, userEmail) => {
+		api
+			.post('/api/users/checkDup', {
+				userId: userId,
+				userEmail: userEmail,
+			})
+
+			.then(response => response.json())
+			.then(result => {});
+	};
+
+	const checkEmailAPI = (userId, userEmail) => {
+		api
+			.post('/api/users/checkDup', {
+				userId: userId,
+				userEmail: userEmail,
+			})
+			.then(response => response.json())
+			.then(result => {
+				if (result === false) {
+					alert('이미 등록된 이메일입니다. 다시 작성해 주십시오!');
+					setEmailDup(false);
+				} else {
+					alert('사용이 가능합니다.');
+					setEmailDup(true);
+				}
+			});
+	};
+
+	const signUp = () => {
+		// if (!idCheck(id) || !pwMacth(pw) || pwContinuous(pw) || pw !== pwCheck) {
+		// 	alert('아이디,비밀번호 확인을 해주세요.');
+		// 	return false;
+		// }
+
+		// if (userName === '') {
+		// 	alert('이름을(를) 입력해주세요.');
+		// 	return false;
+		// }
+
+		// if (email === '') {
+		// 	alert('이메일을 입력해주세요.');
+		// 	return false;
+		// }
+
+		// if (idDup === false) {
+		// 	alert('아이디 중복확인을 해주세요.');
+		// 	return false;
+		// }
+
+		// if (emailDup === false) {
+		// 	alert('이메일 중복확인을 해주세요.');
+		// 	return false;
+		// }
+
+		// if (!emailCheck(email)) {
+		// 	alert('이메일 형식을 지켜주세요!');
+		// 	return false;
+		// }
+
+		dispatch(userActions.signupAPI(id, pw, email, passwordConfirm));
+	};
 	return (
 		<React.Fragment>
 			<SignupWrap>
@@ -31,6 +127,10 @@ const Signup = props => {
 										placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
 										padding="14px"
 										width="332px"
+										onClick={() => {}}
+										onChange={e => {
+											changeId(e);
+										}}
 									/>
 									<Button
 										size="14px"
@@ -38,6 +138,13 @@ const Signup = props => {
 										color="#5f0080"
 										width="120px"
 										padding="11px 14px"
+										onClick={() => {
+											if (!idCheck(id)) {
+												alert('아이디는 6자 이상의 영문 혹은 영문과 숫자 조합만 가능합니다.');
+												return false;
+											}
+											checkIdAPI(id);
+										}}
 									>
 										중복확인
 									</Button>
@@ -59,6 +166,10 @@ const Signup = props => {
 										type="password"
 										padding="14px"
 										width="332px"
+										onClick={() => {}}
+										onChange={e => {
+											changePw(e);
+										}}
 									/>
 								</Grid>
 								<InfoUl className="checkPw">
@@ -79,6 +190,10 @@ const Signup = props => {
 										type="password"
 										padding="14px"
 										width="332px"
+										onClick={() => {}}
+										onChange={e => {
+											passwordConfirm(e);
+										}}
 									/>
 								</Grid>
 								<InfoUl className="ReCheckPw">
@@ -92,7 +207,14 @@ const Signup = props => {
 							</td>
 							<td>
 								<Grid>
-									<Input placeholder="이름을 입력해주세요" padding="14px" width="332px" />
+									<Input
+										placeholder="이름을 입력해주세요"
+										padding="14px"
+										width="332px"
+										onChange={e => {
+											setUserName(e.target.value);
+										}}
+									/>
 								</Grid>
 							</td>
 						</tr>
@@ -102,32 +224,38 @@ const Signup = props => {
 							</td>
 							<td>
 								<Grid flex width="460px">
-									<Input placeholder="예: marketkurly@kurly.com" padding="14px" width="332px" />
+									<Input
+										placeholder="예: marketkurly@kurly.com"
+										padding="14px"
+										width="332px"
+										onChange={e => {
+											setEmail(e.target.value);
+										}}
+									/>
 									<Button
 										size="14px"
 										bg="#ffffff"
 										color="#5f0080"
 										width="120px"
 										padding="11px 14px"
+										onClick={() => {
+											if (!emailCheck(email)) {
+												alert('이메일 형식을 지켜주세요!');
+												return false;
+											}
+											checkEmailAPI(email);
+										}}
 									>
 										중복확인
 									</Button>
 								</Grid>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								주소<CheckSpan>*</CheckSpan>
-							</td>
-							<td>
-								<Grid flex>
-									<Input placeholder="주소를 입력해주세요" padding="14px" width="332px" />
-								</Grid>
-							</td>
-						</tr>
 					</tbody>
 				</SignTable>
-				<Button width="240px">가입하기</Button>
+				<Button width="240px" onClick={signUp}>
+					가입하기
+				</Button>
 			</SignupWrap>
 		</React.Fragment>
 	);
