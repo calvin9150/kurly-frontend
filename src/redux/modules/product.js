@@ -27,11 +27,14 @@ const getProductsMiddleWare = () => {
 	return dispatch => {
 		dispatch(loading(true));
 		api
-			.get('/list')
-			.then(res => {
-				const products = res.data;
-				dispatch(getProducts(products));
-			})
+			.get('/posts/main')
+			.then(
+				res => {
+					const products = res.data.post;
+					dispatch(getProducts(products));
+				},
+				{ withCredentials: true },
+			)
 			.catch(err => {
 				console.error(err);
 				dispatch(loading(false));
@@ -43,8 +46,6 @@ export default handleActions(
 	{
 		[GET_PRODUCTS]: (state, action) =>
 			produce(state, draft => {
-				console.log('action.payload.products');
-				console.log(action.payload.products);
 				draft.list = action.payload.products;
 				draft.isLoading = false;
 			}),

@@ -1,14 +1,19 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import Bargain from '../components/Bargain';
 import CardList from '../components/CardList';
 import Event from '../components/Event';
 import ProductSlick from '../components/ProductSlick';
+import { actionCreators as productsActions } from '../redux/modules/product';
 
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100vw;
+	min-width: 1050px;
+	overflow: hidden;
 	/* height: 100vh; */
 `;
 
@@ -19,16 +24,25 @@ const ProductSlickLayout = styled.div`
 `;
 
 const Main = () => {
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
+
+	const productsList = useSelector(state => state.product.list);
+	console.log('productsList');
+	console.log(productsList);
+
+	useEffect(() => {
+		dispatch(productsActions.getProductsMiddleWare());
+	}, [dispatch]);
 
 	return (
 		<>
 			<Container>
 				<Event />
 				<ProductSlickLayout>
-					<ProductSlick />
+					<ProductSlick productsList={productsList} />
 				</ProductSlickLayout>
-				<CardList />
+				<Bargain />
+				<CardList productsList={productsList} />
 			</Container>
 		</>
 	);
