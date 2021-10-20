@@ -7,11 +7,11 @@ import styled from 'styled-components';
 import CartCard from '../components/CartCard';
 import { Text, Button } from '../elements/index';
 import { history } from '../redux/configureStore';
-import { priceUnit } from '../shared/common';
+import { pryaiceUnit } from '../shared/common';
 import { actionCreators as cartActions } from '../redux/modules/cart';
 
 const Cart = props => {
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	// const user_info = useSelector(state => state.user.user);
 	// const cart_list = useSelector(state => state.cart_list);
 
@@ -21,10 +21,10 @@ const Cart = props => {
 	// 	.reduce((acc, curry) => acc + curry, 0);
 
 	//기본배송비 유뮤
-	// const delivery_change = cart_list.length === 0 ? 0 : 3000;
-	useEffect(() => {
-		dispatch(cartActions.getCartAPI());
-	}, []);
+	// total_price >=10000 ? 0 : total_price+3000;
+	// useEffect(() => {
+	// 	dispatch(cartActions.getCartAPI());
+	// }, []);
 
 	return (
 		<div>
@@ -58,7 +58,7 @@ const Cart = props => {
 						{/* 가격 */}
 						<PriceBox>
 							<ProductPriceBox>
-								<Text>배송비</Text>
+								<Text>상품금액</Text>
 								<Text>가격자리 원</Text>
 							</ProductPriceBox>
 							<ProductPriceBox>
@@ -69,12 +69,11 @@ const Cart = props => {
 							</ProductPriceBox>
 
 							{/* 적립 */}
-							<ProductPriceBox>
-								<SaveMoneyBox>
-									<SaveMoney>적립</SaveMoney>
-									<MoneyInfo>구매 시 0원 적립</MoneyInfo>
-								</SaveMoneyBox>
-							</ProductPriceBox>
+
+							<SaveMoneyBox>
+								<SaveMoney>적립</SaveMoney>
+								<MoneyInfo>구매 시 0원 적립</MoneyInfo>
+							</SaveMoneyBox>
 						</PriceBox>
 					</OrderBox>
 					<OrderInfoBox>

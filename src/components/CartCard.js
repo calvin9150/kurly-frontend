@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const CartCard = props => {
-	const [count, setCount] = useState(props.productCount);
+	const [count, setCount] = useState(1);
+
+	function min() {
+		if (count > 0) {
+			setCount(count - 1);
+		} else alert('그만하라고');
+	}
 
 	return (
 		<React.Fragment>
@@ -16,9 +22,10 @@ const CartCard = props => {
 				<TitleBox>
 					<h4>음식 이름 자리</h4>
 				</TitleBox>
+				<h3>{count}</h3>
 				<CountBox>
-					<CountBtn>-</CountBtn>
-					<CountBtn>+</CountBtn>
+					<CountBtn onClick={() => setCount(count + 1)}>+</CountBtn>
+					<CountBtn onClick={() => min()}>-</CountBtn>
 				</CountBox>
 				<h4>음식 가격 자리 원</h4>
 				<DeleteBtn />

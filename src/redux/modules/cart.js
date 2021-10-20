@@ -15,20 +15,24 @@ const initialState = {
 
 //axios
 const instance = axios.create({
-	baseURL: 'https://3.35.233.239',
+	baseURL: 'http://3.35.233.239/api/',
 	headers: {
-		'Content-Type': 'application/json',
+		'content-type': 'application/json;charset=UTF-8',
+		accept: 'application/json',
 	},
 });
 
 //미들웨어
 const getCartAPI = () => {
-	return async function (dispatch, getState, { history }) {
-		await instance
-			.get('https://3.35.233.239/myPage')
-			.then(reponse => {
-				console.log(reponse);
-			})
+	return function (dispatch, getState, { history }) {
+		instance
+			.get('/carts')
+			.then(
+				reponse => {
+					console.log(reponse.data);
+				},
+				{ withCredentials: true },
+			)
 			.catch(error => {
 				console.log(error, '장바구니 가져오기 에러');
 			});
