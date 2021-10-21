@@ -5,10 +5,12 @@ import { api } from '../../shared/api';
 
 const ADD_CART = 'ADD_CART';
 const LOADING = 'LOADING';
+const SET_CART = 'SET_CART';
 
 const addCart = createAction(ADD_CART, cart => ({
 	cart,
 }));
+const setCart = createAction(SET_CART, cartList => ({ cartList }));
 const loading = createAction(LOADING, isLoading => ({
 	isLoading,
 }));
@@ -48,6 +50,24 @@ const addCardMiddleWare = (id, title, price, img, quantity) => {
 	};
 };
 
+const getCartAPI = () => {
+	return function (dispatch, getState, { history }) {
+		api
+			.get('list')
+			.then(
+				reponse => {
+					console.log(reponse.data);
+					dispatch(setCart(reponse.data));
+				},
+
+				// { withCredentials: true },
+			)
+			.catch(error => {
+				console.log(error, '장바구니 가져오기 에러');
+			});
+	};
+};
+
 export default handleActions(
 	{
 		[ADD_CART]: (state, action) =>
@@ -59,12 +79,17 @@ export default handleActions(
 			produce(state, draft => {
 				draft.isLoading = action.payload.isLoading;
 			}),
+		[SET_CART]: (state, action) =>
+			produce(state, draft => {
+				draft.list = action.payload.cartList;
+			}),
 	},
 	initialState,
 );
 
 const actionCreators = {
 	addCardMiddleWare,
+	getCartAPI,
 };
 
 export { actionCreators };
