@@ -44,6 +44,12 @@ const addCardMiddleWare = (id, title, price, img, quantity) => {
 				alert('장바구니에 상품을 담았습니다!');
 			})
 			.catch(err => {
+				console.log(err.response);
+				if (err.response.statusText === 'Unauthorized') {
+					alert('로그인 후 이용해주세요.');
+					dispatch(loading(false));
+					return;
+				}
 				alert(err.response.data.msg);
 				dispatch(loading(false));
 			});
