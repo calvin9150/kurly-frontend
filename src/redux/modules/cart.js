@@ -44,7 +44,7 @@ const addCardMiddleWare = (id, title, price, img, quantity) => {
 				alert('장바구니에 상품을 담았습니다!');
 			})
 			.catch(err => {
-				console.error(err);
+				alert(err.response.data.msg);
 				dispatch(loading(false));
 			});
 	};
