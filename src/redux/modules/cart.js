@@ -35,14 +35,12 @@ const addCardMiddleWare = (id, title, price, img, quantity) => {
 				img,
 				quantity,
 			})
-			.then(
-				res => {
-					const products = res.data.post;
-					// dispatch(addCart(products));
-					dispatch(loading(false));
-				},
-				{ withCredentials: true },
-			)
+			.then(res => {
+				// const products = res.data.post;
+				// dispatch(addCart(products));
+				dispatch(loading(false));
+				alert('장바구니에 상품을 담았습니다!');
+			})
 			.catch(err => {
 				console.error(err);
 				dispatch(loading(false));
