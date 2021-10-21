@@ -11,90 +11,90 @@ import { pryaiceUnit } from '../shared/common';
 import { actionCreators as cartActions } from '../redux/modules/cart';
 
 const Cart = props => {
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	// const user_info = useSelector(state => state.user.user);
-	// const cart_list = useSelector(state => state.cart_list);
-
+	const cart_list = useSelector(state => state.cart.list);
+	console.log(cart_list);
 	//장바구니 총구매(뱌송비 제외)
 	// let total_price = cart_list
 	// 	.map(c => c.producePrice * c.produceCount)
 	// 	.reduce((acc, curry) => acc + curry, 0);
 
 	//기본배송비 유뮤
-	// total_price >=10000 ? 0 : total_price+3000;
-	// useEffect(() => {
-	// 	dispatch(cartActions.getCartAPI());
-	// }, []);
-
+	// total_price >10000 ? 0 : total_price+3000;
+	useEffect(() => {
+		dispatch(cartActions.getCartAPI());
+	}, []);
 	return (
-		<div>
-			<TitleBox>
-				<Title>장바구니</Title>
+		<>
+			<div>
+				<TitleBox>
+					<Title>장바구니</Title>
 
-				<DeleteUl>
-					<li>전체상품 10개</li>
-				</DeleteUl>
-			</TitleBox>
-			<ContentBox>
-				{/* 상품담는  박스 */}
-				<CartBox>
-					<CartCard />
-				</CartBox>
-
-				{/* 옆에 박스 */}
-				<div>
-					<OrderBox>
-						<AddressBox>
-							<AdressIcon src="https://res.kurly.com/pc/service/cart/2007/ico_location.svg" />
-							<span className="address">배송지</span>
-							<Text margin="7px">{/* {user_info?.address} */}</Text>
-							<Text size="14px" color="#5f0080">
-								샛별배송
-							</Text>
-							<InputBox>
-								<span>배송지 변경</span>
-							</InputBox>
-						</AddressBox>
-						{/* 가격 */}
-						<PriceBox>
-							<ProductPriceBox>
-								<Text>상품금액</Text>
-								<Text>가격자리 원</Text>
-							</ProductPriceBox>
-							<ProductPriceBox>
-								<Text>결제예정금액</Text>
-								<Text>
-									<TotalPrice>총합 자리</TotalPrice> 원
+					<DeleteUl>
+						<li>전체상품 10개</li>
+					</DeleteUl>
+				</TitleBox>
+				<ContentBox>
+					{/* 상품담는  박스 */}
+					<CartBox>
+						<CartCard cart_list={cart_list} />
+					</CartBox>
+					;{/* 옆에 박스 */}
+					<div>
+						<OrderBox>
+							<AddressBox>
+								<AdressIcon src="https://res.kurly.com/pc/service/cart/2007/ico_location.svg" />
+								<span className="address">배송지</span>
+								<Text margin="7px">{/* {user_info?.address} */}</Text>
+								<Text size="14px" color="#5f0080">
+									샛별배송
 								</Text>
-							</ProductPriceBox>
+								<InputBox>
+									<span>배송지 변경</span>
+								</InputBox>
+							</AddressBox>
+							{/* 가격 */}
+							<PriceBox>
+								<ProductPriceBox>
+									<Text>상품금액</Text>
+									<Text>가격자리 원</Text>
+								</ProductPriceBox>
+								<ProductPriceBox>
+									<Text>결제예정금액</Text>
+									<Text>
+										<TotalPrice>총합 자리</TotalPrice> 원
+									</Text>
+								</ProductPriceBox>
 
-							{/* 적립 */}
+								{/* 적립 */}
 
-							<SaveMoneyBox>
-								<SaveMoney>적립</SaveMoney>
-								<MoneyInfo>구매 시 0원 적립</MoneyInfo>
-							</SaveMoneyBox>
-						</PriceBox>
-					</OrderBox>
-					<OrderInfoBox>
-						<Button
-							margin="25px 0px"
-							_onClick={() => {
-								alert('주문이 완료되었습니다.');
-								history.push('/');
-							}}
-						>
-							주문하기
-						</Button>
-						<Info>
-							<li>· '입금확인' 상태일 때는 주문 내역 상세에서 직접 주문취</li>
-							<li>소가 가능합니다.</li>
-							<li>· '입금확인' 이후 상태에는 고객센터로 문의해주세요.</li>
-						</Info>
-					</OrderInfoBox>
-				</div>
-			</ContentBox>
-		</div>
+								<SaveMoneyBox>
+									<SaveMoney>적립</SaveMoney>
+									<MoneyInfo>구매 시 0원 적립</MoneyInfo>
+								</SaveMoneyBox>
+							</PriceBox>
+						</OrderBox>
+						<OrderInfoBox>
+							<Button
+								margin="25px 0px"
+								_onClick={() => {
+									alert('주문이 완료되었습니다.');
+									history.push('/');
+								}}
+							>
+								주문하기
+							</Button>
+							<Info>
+								<li>· '입금확인' 상태일 때는 주문 내역 상세에서 직접 주문취</li>
+								<li>소가 가능합니다.</li>
+								<li>· '입금확인' 이후 상태에는 고객센터로 문의해주세요.</li>
+							</Info>
+						</OrderInfoBox>
+					</div>
+				</ContentBox>
+			</div>
+		</>
 	);
 };
 

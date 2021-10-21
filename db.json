@@ -1,9 +1,56 @@
 {
-  "memo": [
+  "list": [
     {
-      "id": 1,
-      "title": "첫 메모 제목",
-      "body": "첫 메모 내용"
+      "result": "success",
+      "cartAllList": {
+        "userId": "test1",
+        "postId": "312rn12h98fg4209",
+        "title": "상품이름",
+        "price": 3000,
+        "img": "imgUrl",
+        "quantity": 1
+      },
+
+      "msg": "장바구니를 모두 불러왔습니다"
+    },
+    {
+      "result": "success",
+      "cartAllList": {
+        "userId": "test1",
+        "postId": "212rn12h98fg4209",
+        "title": "상품이름1",
+        "price": 4000,
+        "img": "imgUrl",
+        "quantity": 1
+      },
+
+      "msg": "장바구니를 모두 불러왔습니다"
+    },
+    {
+      "result": "success",
+      "cartAllList": {
+        "userId": "test1",
+        "postId": "312rn12398fg4209",
+        "title": "상품이름2",
+        "price": 5000,
+        "img": "imgUrl",
+        "quantity": 1
+      },
+
+      "msg": "장바구니를 모두 불러왔습니다"
+    },
+    {
+      "result": "success",
+      "cartAllList": {
+        "userId": "test1",
+        "postId": "312rn11h98fg4209",
+        "title": "상품이름6",
+        "price": 2000,
+        "img": "imgUrl",
+        "quantity": 1
+      },
+
+      "msg": "장바구니를 모두 불러왔습니다"
     }
   ]
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const CartCard = props => {
 	const [count, setCount] = useState(1);
 
+	console.log(props);
 	function min() {
 		if (count > 0) {
 			setCount(count - 1);
@@ -12,24 +13,29 @@ const CartCard = props => {
 
 	return (
 		<React.Fragment>
-			<CartBox>
-				{/* 이미지 넣어야 함 */}
-				<img
-					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBYGq0VSJ4Z6fWlTqEW9dh7vrO0pPqQryIrw&usqp=CAU"
-					width="60px"
-					height="78px"
-				/>
-				<TitleBox>
-					<h4>음식 이름 자리</h4>
-				</TitleBox>
-				<h3>{count}</h3>
-				<CountBox>
-					<CountBtn onClick={() => setCount(count + 1)}>+</CountBtn>
-					<CountBtn onClick={() => min()}>-</CountBtn>
-				</CountBox>
-				<h4>음식 가격 자리 원</h4>
-				<DeleteBtn />
-			</CartBox>
+			{props.cart_list.map(e => {
+				return (
+					<CartBox>
+						{/* 이미지 넣어야 함 */}
+
+						<img
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBYGq0VSJ4Z6fWlTqEW9dh7vrO0pPqQryIrw&usqp=CAU"
+							width="60px"
+							height="78px"
+						/>
+						<TitleBox>
+							<h4>{e.cartAllList.title}</h4>
+						</TitleBox>
+						<h3>{count}</h3>
+						<CountBox>
+							<CountBtn onClick={() => setCount(count + 1)}>+</CountBtn>
+							<CountBtn onClick={() => min()}>-</CountBtn>
+						</CountBox>
+						<h4>음식 가격 자리 원</h4>
+						<DeleteBtn />
+					</CartBox>
+				);
+			})}
 		</React.Fragment>
 	);
 };
