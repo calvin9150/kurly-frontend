@@ -25,32 +25,27 @@ const initialState = {
 };
 
 // 회원가입
-const signupAPI = (id, pw, email, name, passwordConfirm) => {
+const signupAPI = (id, pw, passwordConfirm, email, name) => {
 	return function (dispatch, getState, { history }) {
-		window.alert('아이디', id);
-		window.alert('비밀번호', pw);
-		window.alert('비밀번호확인', passwordConfirm);
-		window.alert('이름', name);
-		window.alert('이메일', email);
+		console.log('아이디', id);
+		console.log('비밀번호', pw);
+		console.log('비밀번호확인', passwordConfirm);
+		console.log('이메일', email);
+		console.log('이름', name);
 		api
 			.post('/users/signUp', {
-				userid: id,
+				userId: id,
 				password: pw,
-				name: name,
 				passwordConfirm: passwordConfirm,
 				email: email,
+				name: name,
 			})
-			.then(response => response.json())
-			.then(result => {
-				let dupMsg = result.message;
-				if (dupMsg === 'emailfalse') {
-					window.alert('이메일 중복확인을 해주세요.');
-				} else if (dupMsg === 'usernamefalse') {
-					window.alert('아이디 중복확인을 해주세요.');
-				} else {
-					window.alert('회원가입이 되었습니다!');
-					history.push('/login');
-				}
+			.then(res => {
+				window.alert('회원가입이 되었습니다!');
+				history.push('/login');
+			})
+			.catch(err => {
+				console.log(err);
 			});
 	};
 };
@@ -58,24 +53,23 @@ const signupAPI = (id, pw, email, name, passwordConfirm) => {
 // 로그인
 const loginAPI = (id, pw) => {
 	return function (dispatch, getState, { history }) {
+		console.log(id, pw);
 		api
 			.post('/users/logIn', {
-				userid: id,
+				email: id,
 				password: pw,
 			})
-			.then(result => {
-				console.log(result);
-				if (result.status === 200) {
-					let token = result.headers.get('Authorization');
-					let userInfo = result.headers.get('userInfo');
-					userInfo = JSON.parse(userInfo);
-					userInfo.name = decodeURI(atob(userInfo.name));
-					localStorage.setItem('token', token);
-					localStorage.setItem('userInfo', JSON.stringify(userInfo));
+			.then(res => {
+				console.log(res);
+				if (res.status === 200) {
+					localStorage.setItem('token', res.data.token);
+					const base64Payload = res.data.token.split('.')[1];
+					const payload = Buffer.from(base64Payload, 'base64');
+					const result = JSON.parse(payload.toString());
+					localStorage.setItem('userInfo', result.userId);
 					dispatch(
 						setUser({
-							uid: userInfo.uid,
-							name: userInfo.name,
+							name: result.userId,
 						}),
 					);
 					history.push('/');
@@ -102,16 +96,14 @@ const logout = () => {
 const isLogin = () => {
 	return function (dispatch, getState, { history }) {
 		const token = localStorage.getItem('token');
-		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		const userInfo = localStorage.getItem('userInfo');
 
 		if (!token || !userInfo) {
 			return false;
 		}
 		dispatch(
 			setUser({
-				uid: userInfo.uid,
-				name: userInfo.name,
-				address: userInfo.address,
+				name: userInfo,
 			}),
 		);
 	};

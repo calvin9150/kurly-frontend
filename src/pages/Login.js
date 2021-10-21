@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements/index';
 import { history } from '../redux/configureStore';
 import { useDispatch } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/product';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 // Login 함수형 컴포넌트를 만든다.
 const Login = props => {
@@ -24,14 +24,27 @@ const Login = props => {
 		dispatch(userActions.loginAPI(id, pw));
 	};
 
+	const onChangeId = e => {
+		setId(e.target.value);
+	};
+
+	const onChangePw = e => {
+		setPw(e.target.value);
+	};
+
 	return (
 		<React.Fragment>
 			<LoginWrap>
 				<Text size="20px" bold margin="0px 0px 30px 0px">
 					로그인
 				</Text>
-				<Input placeholder="아이디를 입력해주세요" />
-				<Input placeholder="비밀번호를 입력해주세요" type="password" margin="10px 0px" />
+				<Input placeholder="아이디를 입력해주세요" onChange={onChangeId} />
+				<Input
+					placeholder="비밀번호를 입력해주세요"
+					type="password"
+					margin="10px 0px"
+					onChange={onChangePw}
+				/>
 				<Grid flex width="340px" margin="-15px 0px 0px 0px">
 					<Grid flex>
 						<input type="checkbox" name="check" />
