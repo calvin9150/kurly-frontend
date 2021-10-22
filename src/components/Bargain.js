@@ -6,6 +6,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	font-size: 2em;
 	width: 100%;
 	height: 660px;
@@ -17,7 +18,7 @@ const Contents = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-
+	margin-right: 20px;
 	/* img {
 		width: 330px;
 		margin: 10px;

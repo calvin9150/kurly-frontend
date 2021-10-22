@@ -27,8 +27,6 @@ const Main = () => {
 	const dispatch = useDispatch();
 
 	const productsList = useSelector(state => state.product.list);
-	console.log('productsList');
-	console.log(productsList);
 
 	useEffect(() => {
 		dispatch(productsActions.getProductsMiddleWare());

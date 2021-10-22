@@ -15,11 +15,13 @@ const Container = styled.div`
 
 const Contents = styled.div`
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 	width: 55%;
 	margin: 30px 0 30px;
-
+	@media screen and (max-width: 1280px) {
+		justify-content: center;
+	}
 	/* img {
 		width: 330px;
 		margin: 10px;
