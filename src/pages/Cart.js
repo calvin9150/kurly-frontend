@@ -62,7 +62,7 @@ const Cart = props => {
 								<ProductPriceBox>
 									<Text>결제예정금액</Text>
 									<Text>
-										<TotalPrice>{total_price}</TotalPrice> 원
+										<TotalPrice>{total_price + delivery_charge}</TotalPrice> 원
 									</Text>
 								</ProductPriceBox>
 								<SaveMoneyBox>
