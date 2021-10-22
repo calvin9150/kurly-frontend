@@ -213,7 +213,7 @@ const SearchInput = styled.input`
 	height: 35px;
 	color: #666;
 	font-size: 12px;
-	padding-left: 14px;
+	padding-left: 34px;
 	background-image: url('https://res.kurly.com/pc/service/common/1908/ico_search_x2.png');
 	background-repeat: no-repeat;
 	background-size: 30px 30px;
