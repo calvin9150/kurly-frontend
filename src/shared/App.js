@@ -8,7 +8,7 @@ import Cart from '../pages/Cart';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Header from '../components/Header';
-
+import Footer from '../components/footer';
 function App() {
 	return (
 		<>
@@ -19,6 +19,7 @@ function App() {
 				<Route path="/login" exact component={Login} />
 				<Route path="/signup" exact component={Signup} />
 			</ConnectedRouter>
+			<Footer />
 		</>
 	);
 }
