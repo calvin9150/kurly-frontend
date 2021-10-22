@@ -56,7 +56,7 @@ const loginAPI = (id, pw) => {
 		console.log(id, pw);
 		api
 			.post('/users/logIn', {
-				email: id,
+				userId: id,
 				password: pw,
 			})
 			.then(res => {
@@ -78,7 +78,7 @@ const loginAPI = (id, pw) => {
 				}
 			})
 			.catch(error => {
-				console.log(error);
+				alert(error.response.data.errorMessage);
 			});
 	};
 };
