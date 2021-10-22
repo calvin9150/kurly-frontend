@@ -41,15 +41,18 @@ const Signup = props => {
 		passwordConfirm(checkPw);
 	};
 
-	const checkIdAPI = (userId, userEmail) => {
+	const checkIdAPI = userId => {
 		api
-			.post('/api/users/checkDup', {
+			.post('/users/checkDup', {
 				userId: userId,
-				userEmail: userEmail,
 			})
-
-			.then(response => response.json())
-			.then(result => {});
+			.then(res => {
+				setIdDup(true);
+				alert('사용가능한 아이디 입니다.');
+			})
+			.catch(err => {
+				alert(err);
+			});
 	};
 
 	const checkEmailAPI = (userId, userEmail) => {
@@ -71,37 +74,32 @@ const Signup = props => {
 	};
 
 	const signUp = () => {
-		// if (!idCheck(id) || !pwMacth(pw) || pwContinuous(pw) || pw !== pwCheck) {
-		// 	alert('아이디,비밀번호 확인을 해주세요.');
-		// 	return false;
-		// }
+		if (id === '' || pw === '' || pwCheck === '' || userName === '' || email === '') {
+			alert('위에 내용들을 채워주세요.');
+			return false;
+		}
 
-		// if (userName === '') {
-		// 	alert('이름을(를) 입력해주세요.');
-		// 	return false;
-		// }
+		if (userName === '') {
+			alert('이름을(를) 입력해주세요.');
+			return false;
+		}
 
-		// if (email === '') {
-		// 	alert('이메일을 입력해주세요.');
-		// 	return false;
-		// }
+		if (email === '') {
+			alert('이메일을 입력해주세요.');
+			return false;
+		}
 
-		// if (idDup === false) {
-		// 	alert('아이디 중복확인을 해주세요.');
-		// 	return false;
-		// }
+		if (idDup === false) {
+			alert('아이디 중복확인을 해주세요.');
+			return false;
+		}
 
-		// if (emailDup === false) {
-		// 	alert('이메일 중복확인을 해주세요.');
-		// 	return false;
-		// }
+		if (!emailCheck(email)) {
+			alert('이메일 형식을 지켜주세요!');
+			return false;
+		}
 
-		// if (!emailCheck(email)) {
-		// 	alert('이메일 형식을 지켜주세요!');
-		// 	return false;
-		// }
-
-		dispatch(userActions.signupAPI(id, pw, email, passwordConfirm));
+		dispatch(userActions.signupAPI(id, pw, pwCheck, email, userName));
 	};
 	return (
 		<React.Fragment>
@@ -192,7 +190,7 @@ const Signup = props => {
 										width="332px"
 										onClick={() => {}}
 										onChange={e => {
-											passwordConfirm(e);
+											passwordConfirm(e.target.value);
 										}}
 									/>
 								</Grid>
@@ -232,7 +230,7 @@ const Signup = props => {
 											setEmail(e.target.value);
 										}}
 									/>
-									<Button
+									{/* <Button
 										size="14px"
 										bg="#ffffff"
 										color="#5f0080"
@@ -247,7 +245,7 @@ const Signup = props => {
 										}}
 									>
 										중복확인
-									</Button>
+									</Button> */}
 								</Grid>
 							</td>
 						</tr>
