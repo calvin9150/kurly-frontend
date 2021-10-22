@@ -1,12 +1,12 @@
 // Header.js
 
 // import를 한다.
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements/index';
 import { history } from '../redux/configureStore';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/product';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 // image
 import HeaderLeftImg from '../images/header-left-delivery.gif';
@@ -31,6 +31,10 @@ const Header = props => {
 			headerbox.style.position = '';
 		}
 	};
+
+	useEffect(() => {
+		dispatch(userActions.isLogin());
+	}, [dispatch]);
 
 	return (
 		<React.Fragment>
@@ -125,7 +129,6 @@ const HeaderWrap = styled.div`
 const HeaderMenu = styled.ul`
 	display: flex;
 	font-size: 12px;
-
 	& li {
 		padding: 0px 24px 0px 0px;
 		position: relative;
