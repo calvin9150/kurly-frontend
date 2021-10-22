@@ -129,7 +129,6 @@ const HeaderWrap = styled.div`
 const HeaderMenu = styled.ul`
 	display: flex;
 	font-size: 12px;
-
 	& li {
 		padding: 0px 24px 0px 0px;
 		position: relative;

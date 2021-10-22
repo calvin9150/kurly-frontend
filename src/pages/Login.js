@@ -94,7 +94,6 @@ const FindIdPw = styled.ul`
 	font-size: 13px;
 	display: flex;
 	gap: 5px;
-
 	& li:nth-child(1)::after {
 		content: '|';
 		font-size: 6px;
