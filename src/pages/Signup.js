@@ -1,12 +1,12 @@
 // Signup.js
 
 // import를 한다.
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Button } from '../elements/index';
 
 import { actionCreators as userActions } from '../redux/modules/user';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { idCheck, pwMacth, pwContinuous, emailCheck } from '../shared/common';
 import { api } from '../shared/api';
 
@@ -18,7 +18,6 @@ const Signup = props => {
 	const [userName, setUserName] = useState('');
 	const [email, setEmail] = useState('');
 	const [idDup, setIdDup] = useState(false);
-	const [emailDup, setEmailDup] = useState(false);
 	const dispatch = useDispatch();
 
 	//해당 조건 충족 여부에 따라 info 다르게..
@@ -51,25 +50,7 @@ const Signup = props => {
 				alert('사용가능한 아이디 입니다.');
 			})
 			.catch(err => {
-				alert(err);
-			});
-	};
-
-	const checkEmailAPI = (userId, userEmail) => {
-		api
-			.post('/api/users/checkDup', {
-				userId: userId,
-				userEmail: userEmail,
-			})
-			.then(response => response.json())
-			.then(result => {
-				if (result === false) {
-					alert('이미 등록된 이메일입니다. 다시 작성해 주십시오!');
-					setEmailDup(false);
-				} else {
-					alert('사용이 가능합니다.');
-					setEmailDup(true);
-				}
+				alert(err.response.data.errorMessage);
 			});
 	};
 
@@ -79,6 +60,16 @@ const Signup = props => {
 			return false;
 		}
 
+		if (idDup === false) {
+			alert('아이디 중복확인을 해주세요.');
+			return false;
+		}
+
+		if (!pwMacth(pw)) {
+			alert('비밀번호의 형식을 맞춰 입력해주세요. ');
+			return;
+		}
+
 		if (userName === '') {
 			alert('이름을(를) 입력해주세요.');
 			return false;
@@ -86,11 +77,6 @@ const Signup = props => {
 
 		if (email === '') {
 			alert('이메일을 입력해주세요.');
-			return false;
-		}
-
-		if (idDup === false) {
-			alert('아이디 중복확인을 해주세요.');
 			return false;
 		}
 
@@ -230,22 +216,6 @@ const Signup = props => {
 											setEmail(e.target.value);
 										}}
 									/>
-									{/* <Button
-										size="14px"
-										bg="#ffffff"
-										color="#5f0080"
-										width="120px"
-										padding="11px 14px"
-										onClick={() => {
-											if (!emailCheck(email)) {
-												alert('이메일 형식을 지켜주세요!');
-												return false;
-											}
-											checkEmailAPI(email);
-										}}
-									>
-										중복확인
-									</Button> */}
 								</Grid>
 							</td>
 						</tr>

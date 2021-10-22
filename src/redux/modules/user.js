@@ -45,7 +45,9 @@ const signupAPI = (id, pw, passwordConfirm, email, name) => {
 				history.push('/login');
 			})
 			.catch(err => {
-				console.log(err);
+				if (err.response.data.msg) {
+					alert(err.response.data.msg);
+				}
 			});
 	};
 };
@@ -61,21 +63,17 @@ const loginAPI = (id, pw) => {
 			})
 			.then(res => {
 				console.log(res);
-				if (res.status === 200) {
-					localStorage.setItem('token', res.data.token);
-					const base64Payload = res.data.token.split('.')[1];
-					const payload = Buffer.from(base64Payload, 'base64');
-					const result = JSON.parse(payload.toString());
-					localStorage.setItem('userInfo', result.userId);
-					dispatch(
-						setUser({
-							name: result.userId,
-						}),
-					);
-					history.push('/');
-				} else {
-					window.alert('로그인에 실패했습니다.');
-				}
+				localStorage.setItem('token', res.data.token);
+				const base64Payload = res.data.token.split('.')[1];
+				const payload = Buffer.from(base64Payload, 'base64');
+				const result = JSON.parse(payload.toString());
+				localStorage.setItem('userInfo', result.userId);
+				dispatch(
+					setUser({
+						name: result.userId,
+					}),
+				);
+				history.push('/');
 			})
 			.catch(error => {
 				alert(error.response.data.errorMessage);
