@@ -95,7 +95,7 @@ const CountBtn = styled.button`
 	background-color: white;
 	font-size: 18px;
 	position: relative;
-	top: -3px;
+	top: -1px;
 	border: none;
 	outline: none;
 	cursor: pointer;
