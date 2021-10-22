@@ -41,7 +41,6 @@ const Cart = props => {
 							<AddressBox>
 								<AdressIcon src="https://res.kurly.com/pc/service/cart/2007/ico_location.svg" />
 								<span className="address">배송지</span>
-
 								<Text margin="7px">{user_info?.address}</Text>
 								<Text size="14px" color="#5f0080">
 									샛별배송
@@ -97,7 +96,10 @@ const Cart = props => {
 export default Cart;
 
 const All = styled.div`
-	margin-left: 250px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 `;
 
 const NoneCart = styled.p`
@@ -113,10 +115,11 @@ const OrderInfoBox = styled.div`
 const SaveMoneyBox = styled.div`
 	text-align: right;
 	padding: 0px 18px 0px 0px;
+	margin-top: 10px;
 `;
 
 const SaveMoney = styled.span`
-	font-size: 10px;
+	font-size: 8px;
 	display: inline-block;
 	padding: 1px 8px;
 	color: #ffffff;
@@ -128,7 +131,7 @@ const SaveMoney = styled.span`
 	vertical-align: middle;
 	position: relative;
 	right: 5px;
-	top: -1px;
+	top: 1px;
 `;
 
 const MoneyInfo = styled.span`
@@ -174,7 +177,7 @@ const Title = styled.div`
 `;
 
 const TitleBox = styled.div`
-	padding: 55px 250px 55px 0px;
+	padding: 55px 55px 55px 0px;
 `;
 const CartBox = styled.div`
 	width: 742px;

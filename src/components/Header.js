@@ -36,6 +36,10 @@ const Header = props => {
 		dispatch(userActions.isLogin());
 	}, [dispatch]);
 
+	const readyAlert = () => {
+		alert('버전2를 기대해 주세요');
+	};
+
 	return (
 		<React.Fragment>
 			<Grid width="1050px" margin="0 auto">
@@ -75,7 +79,9 @@ const Header = props => {
 										</li>
 									</React.Fragment>
 								)}
-								<li className="arrow">고객센터</li>
+								<li className="arrow" onClick={readyAlert}>
+									고객센터
+								</li>
 							</HeaderMenu>
 						</Grid>
 						<Grid center height="63px">
@@ -90,19 +96,24 @@ const Header = props => {
 					</ScrollMenu>
 					<Grid flex>
 						<Grid>
-							<HeaderCategory>
+							<HeaderCategory onClick={readyAlert}>
 								<li className="all-category">전체 카테고리</li>
-								<li onClick={() => history.push('/new')}>신상품</li>
-								<li onClick={() => history.push('/')}>베스트</li>
-								<li onClick={() => history.push('/cheap')}>알뜰쇼핑 </li>
-								<li onClick={() => history.push('/event')}> 금주혜택</li>
+								<li>신상품</li>
+								<li>베스트</li>
+								<li>알뜰쇼핑 </li>
+								<li> 금주혜택</li>
 							</HeaderCategory>
 						</Grid>
 						<Grid>
-							<SearchInput type="text" placeholder="검색어를 입력해주세요." />
+							<SearchInput
+								type="text"
+								placeholder="검색어를 입력해주세요."
+								onClick={readyAlert}
+								readOnly
+							/>
 						</Grid>
 						<Grid>
-							<Icons className="adress-icon" />
+							<Icons className="adress-icon" onClick={readyAlert} />
 							<Icons
 								className="cart-icon"
 								onClick={() => {

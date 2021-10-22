@@ -5,31 +5,42 @@ import { priceUnit } from '../shared/common';
 import { actionCreators as cartActions } from '../redux/modules/cart';
 
 const CartCard = props => {
-	const [count, setCount] = useState(1);
+	// const [count, setCount] = useState(0);
 	// const originalPrice = props.productCount;
 	const dispatch = useDispatch();
+	const [cartList, setCartList] = useState();
 
-	const cart_list = useSelector(state => state.cart.cart_list);
+	const cart = useSelector(state => state.cart.cart_list);
+	console.log(cartList);
 
-	function min() {
-		if (count > 0) {
-			setCount(count - 1);
-		} else alert('그만하라고');
+	useEffect(() => {
+		setCartList(cart);
+	}, [cartList, cart]);
+
+	function onClickMinus(quantity, id) {
+		if (quantity > 1) {
+			dispatch(cartActions.updateQuantity(quantity - 1, id));
+			return;
+		}
 	}
+
+	const onClickPlus = (quantity, id) => {
+		dispatch(cartActions.updateQuantity(quantity + 1, id));
+	};
 
 	return (
 		<React.Fragment>
-			{cart_list.map(e => {
+			{cart.map((e, index) => {
 				return (
-					<CartBox key={e._id}>
-						<img src={e.img} width="60px" height="78px" />
+					<CartBox key={index}>
+						<img src={e.img} width="60px" height="78px" alt="img" />
 						<TitleBox>
 							<h4>{e.title}</h4>
 						</TitleBox>
 						<h3>{e.quantity}</h3>
 						<CountBox>
-							<CountBtn onClick={() => setCount({ count: e.quantity + 1 })}>+</CountBtn>
-							<CountBtn onClick={() => min()}>-</CountBtn>
+							<CountBtn onClick={() => onClickPlus(e.quantity, e.postId)}>+</CountBtn>
+							<CountBtn onClick={() => onClickMinus(e.quantity, e.postId)}>-</CountBtn>
 						</CountBox>
 						<h4>{e.price * e.quantity}원</h4>
 						<DeleteBtn

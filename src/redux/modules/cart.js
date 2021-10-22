@@ -7,6 +7,7 @@ const ADD_CART = 'ADD_CART';
 const LOADING = 'LOADING';
 const SET_CART = 'SET_CART';
 const DELETE_CART = 'DELETE_CART';
+const UPDATE_CART = 'UPDATE_CART';
 
 const addCart = createAction(ADD_CART, cart => ({
 	cart,
@@ -16,6 +17,10 @@ const loading = createAction(LOADING, isLoading => ({
 	isLoading,
 }));
 const deleteCart = createAction(DELETE_CART, postId => ({ postId }));
+const updateCart = createAction(UPDATE_CART, (postId, quantity) => ({
+	postId,
+	quantity,
+}));
 
 const initialState = {
 	cart_list: [],
@@ -89,6 +94,20 @@ const deleteCartMddleWares = postId => {
 	};
 };
 
+const updateQuantity = (quantity, postId) => {
+	return function (dispatch, getState, { history }) {
+		api
+			.put(`/carts`, { quantity, postId })
+			.then(res => {
+				console.log(res);
+				dispatch(updateCart(postId, quantity));
+			})
+			.catch(err => {
+				console.log(err.response);
+			});
+	};
+};
+
 export default handleActions(
 	{
 		[ADD_CART]: (state, action) =>
@@ -109,6 +128,13 @@ export default handleActions(
 				let idx = draft.cart_list.findIndex(c => c.postId === action.payload.postId);
 				draft.cart_list.splice(idx, 1);
 			}),
+		[UPDATE_CART]: (state, action) =>
+			produce(state, draft => {
+				let idx = draft.cart_list.findIndex(p => p.postId === action.payload.postId);
+				console.log('action.payload.quantity');
+				console.log(action.payload.quantity);
+				draft.cart_list[idx] = { ...draft.cart_list[idx], quantity: action.payload.quantity };
+			}),
 	},
 	initialState,
 );
@@ -117,6 +143,8 @@ const actionCreators = {
 	addCardMiddleWare,
 	getCartAPI,
 	deleteCartMddleWares,
+	updateQuantity,
+	updateCart,
 };
 
 export { actionCreators };

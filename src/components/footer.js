@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button, Text } from '../elements';
 const Footer = props => {
 	return (
-		<React.Fragment>
+		<>
 			<IN width="1050px">
 				<Inner display="flex" width="534px">
 					<Position display="flex" width="160px" margin="20px">
@@ -128,7 +128,7 @@ const Footer = props => {
 					</Inner>
 				</OutsideInfo>
 			</IN>
-		</React.Fragment>
+		</>
 	);
 };
 
@@ -188,7 +188,9 @@ const Spot = styled.li`
 `;
 
 const IN = styled.div`
-	margin-left: 120px;
+	display: flex;
+	justify-content: center;
+	margin: 100px auto;
 	width: 80%;
 	display: flex;
 `;
