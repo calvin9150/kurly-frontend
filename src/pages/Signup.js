@@ -75,7 +75,7 @@ const Signup = props => {
 
 	const signUp = () => {
 		if (id === '' || pw === '' || pwCheck === '' || userName === '' || email === '') {
-			alert('위에 내용들을 채워주세요.');
+			alert('위에 내용들을 모두 채워주세요.');
 			return false;
 		}
 
