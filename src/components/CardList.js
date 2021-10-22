@@ -40,7 +40,7 @@ const CardList = ({ productsList }) => {
 							img={v.img}
 							price={v.price}
 							width="330px"
-							height="570px"
+							height="450px"
 							id={v._id}
 							icon
 						/>

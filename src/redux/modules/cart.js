@@ -6,6 +6,7 @@ import { api } from '../../shared/api';
 const ADD_CART = 'ADD_CART';
 const LOADING = 'LOADING';
 const SET_CART = 'SET_CART';
+const DELETE_CART = 'DELETE_CART';
 
 const addCart = createAction(ADD_CART, cart => ({
 	cart,
@@ -14,8 +15,10 @@ const setCart = createAction(SET_CART, cartList => ({ cartList }));
 const loading = createAction(LOADING, isLoading => ({
 	isLoading,
 }));
+const deleteCart = createAction(DELETE_CART, postId => ({ postId }));
 
 const initialState = {
+	cart_list: [],
 	list: [
 		{
 			title: '[올리타리아] 엑스트라 버진 올리브유',
@@ -58,18 +61,30 @@ const addCardMiddleWare = (id, title, price, img, quantity) => {
 
 const getCartAPI = () => {
 	return function (dispatch, getState, { history }) {
+		// getToken();
 		api
-			.get('list')
-			.then(
-				reponse => {
-					console.log(reponse.data);
-					dispatch(setCart(reponse.data));
-				},
+			.get(`/carts`)
+			.then(res => {
+				console.log(res);
+				dispatch(setCart(res.data.cartAllList));
+			})
+			.catch(err => {
+				console.log('err장바구니조회', err);
+			});
+	};
+};
 
-				// { withCredentials: true },
-			)
-			.catch(error => {
-				console.log(error, '장바구니 가져오기 에러');
+//DELETE
+const deleteCartMddleWares = postId => {
+	return function (dispatch, getState, { history }) {
+		api
+			.delete(`/carts`, { postId })
+			.then(res => {
+				console.log(res);
+				dispatch(deleteCart(postId));
+			})
+			.catch(err => {
+				console.log(err, '삭제에러임');
 			});
 	};
 };
@@ -87,7 +102,12 @@ export default handleActions(
 			}),
 		[SET_CART]: (state, action) =>
 			produce(state, draft => {
-				draft.list = action.payload.cartList;
+				draft.cart_list = action.payload.cartList;
+			}),
+		[DELETE_CART]: (state, action) =>
+			produce(state, draft => {
+				let idx = draft.cart_list.findIndex(c => c.postId === action.payload.postId);
+				draft.cart_list.splice(idx, 1);
 			}),
 	},
 	initialState,
@@ -96,6 +116,7 @@ export default handleActions(
 const actionCreators = {
 	addCardMiddleWare,
 	getCartAPI,
+	deleteCartMddleWares,
 };
 
 export { actionCreators };
