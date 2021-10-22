@@ -45,6 +45,7 @@ const signupAPI = (id, pw, passwordConfirm, email, name) => {
 				history.push('/login');
 			})
 			.catch(err => {
+				console.log(err.response);
 				if (err.response.data.msg) {
 					alert(err.response.data.msg);
 				}
@@ -75,8 +76,8 @@ const loginAPI = (id, pw) => {
 				);
 				history.push('/');
 			})
-			.catch(error => {
-				alert(error.response.data.errorMessage);
+			.catch(err => {
+				alert(err.response.data.msg);
 			});
 	};
 };
