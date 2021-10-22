@@ -158,8 +158,7 @@ const Signup = props => {
 								</Grid>
 								<InfoUl className="checkPw">
 									<li>·10글자 이상 입력</li>
-									<li>·영문/숫자/특수문자(공백 제외)만 허용,2개 이상의 조합</li>
-									<li>·동일한 숫자 3개 이상 연속 사용 불가</li>
+									<li>·영문/숫자/특수문자(공백 제외)만 허용, 3개 이상의 조합</li>
 								</InfoUl>
 							</td>
 						</tr>
